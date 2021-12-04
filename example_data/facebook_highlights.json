@@ -1,0 +1,23 @@
+{
+  "id": "103213382197162",
+  "name": "Carlos Andrés Sánchez González",
+  "email": "casan3@gmail.com",
+  "groups": {
+    "data": [
+      {
+        "name": "Angular Developers",
+        "id": "398779564139778"
+      },
+      {
+        "name": "Python",
+        "id": "270834543757117"
+      }
+    ],
+    "paging": {
+      "cursors": {
+        "before": "QVFIUkNIaWpKdldZAeGotcFpaeU83c1IyUnR0TDl1OHR5RktZAWVZA2LVdBYURoTVI2bnNJTlprb3JkaFE3Wnl4aEpReTFrd2ZAveXFEcXpaOUdfZAWFidE04WUh3",
+        "after": "QVFIUkdfZAjF3TjhNM3YxUFV3VnRmdjJWaFZAyb1hJYnI0N1o5R0w5YTF1Qm5FQm5RVDNXTk5Ra1UzSllvd3J6NTk5cHI3ZA2JlLWtKbmZADemdyVmQ3aV9DSU1n"
+      }
+    }
+  }
+}

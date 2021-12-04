@@ -1,0 +1,30 @@
+{
+  "name": "ms-social-media",
+  "version": "1.0.0",
+  "description": "Social Media Backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "lint": "eslint"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/bell": "^12.3.0",
+    "@hapi/hapi": "^20.2.1",
+    "apollo-server-hapi": "^3.5.0",
+    "graphql": "^16.0.1",
+    "joi": "^17.5.0"
+  },
+  "engines": {
+    "node": "14.x"
+  },
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.0"
+  }
+}
