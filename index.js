@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const {
   ApolloServer,
   ApolloServerPluginStopHapiServer,
@@ -11,6 +13,9 @@ const resolvers = require('./graphql/resolvers');
 const Bell = require('@hapi/bell');
 const Hapi = require('@hapi/hapi');
 
+const FacebookClientID = process.env.FACEBOOK_CLIENTID;
+const FacebookClientSecret = process.env.FACEBOOK_CLIENTSECRET;
+
 const init = async (typeDefs, resolvers) => {
   const app = Hapi.server({ port: 4000 });
   await app.register(Bell);
@@ -19,8 +24,8 @@ const init = async (typeDefs, resolvers) => {
     provider: 'facebook',
     password: 'cookie_encryption_password_secure',
     isSecure: true,
-    clientId: process.env.FACEBOOK_CLIENTID,
-    clientSecret: process.env.FACEBOOK_CLIENTSECRET,
+    clientId: FacebookClientID,
+    clientSecret: FacebookClientSecret,
     location: app.info.uri
   });
 
