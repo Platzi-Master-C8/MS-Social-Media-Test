@@ -19,8 +19,8 @@ const init = async (typeDefs, resolvers) => {
     provider: 'facebook',
     password: 'cookie_encryption_password_secure',
     isSecure: false,
-    clientId: '1555047951509441',
-    clientSecret: 'd73fd234a77f38ca54331a9ad440c786',
+    clientId: process.env.FACEBOOK_CLIENTID,
+    clientSecret: process.env.FACEBOOK_CLIENTSECRET,
     location: app.info.uri
   });
 
