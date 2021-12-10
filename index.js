@@ -50,7 +50,7 @@ const init = async (typeDefs, resolvers) => {
   },
   {
     method: 'GET',
-    path: '/home',
+    path: '/test',
     handler: (request, h) => {
       return {msg: 'hi'}
     }
