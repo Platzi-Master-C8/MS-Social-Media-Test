@@ -18,7 +18,7 @@ const init = async (typeDefs, resolvers) => {
   app.auth.strategy('facebook', 'bell', {
     provider: 'facebook',
     password: 'cookie_encryption_password_secure',
-    isSecure: false,
+    isSecure: true,
     clientId: process.env.FACEBOOK_CLIENTID,
     clientSecret: process.env.FACEBOOK_CLIENTSECRET,
     location: app.info.uri
