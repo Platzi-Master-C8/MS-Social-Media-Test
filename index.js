@@ -39,6 +39,7 @@ const init = async (typeDefs, resolvers) => {
       },
       handler: (request, h) => {
         if (!request.auth.isAuthenticated) {
+          console.log(request.auth);
           return `Authentication failed due to: ${request.auth.error.message}`;
         }
 
