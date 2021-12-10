@@ -25,7 +25,7 @@ const init = async (typeDefs, resolvers) => {
   });
 
   app.route([{
-    method: ['GET', 'POST'], // Must handle both GET and POST
+    method: '*', // Must handle both GET and POST
     path: '/loginFacebook', // The callback endpoint registered with the provider
     options: {
       auth: {
