@@ -26,7 +26,8 @@ const init = async (typeDefs, resolvers) => {
     isSecure: true,
     clientId: FacebookClientID,
     clientSecret: FacebookClientSecret,
-    location: app.info.uri
+    // location: app.info.uri
+    location: 'https://ms-social-media.vercel.app/'
   });
 
   app.route([{
