@@ -40,11 +40,10 @@ const init = async (typeDefs, resolvers) => {
       },
       handler: (request, h) => {
         if (!request.auth.isAuthenticated) {
-          console.log(request.auth);
-          return `Authentication failed due to: ${request.auth.error.message}`;
+          return request.auth;
         }
 
-        console.log(request.auth.credentials);
+        // console.log(request.auth.credentials);
 
         // Perform any account lookup or registration, setup local session,
         // and redirect to the application. The third-party credentials are
