@@ -13,8 +13,13 @@ const resolvers = require('./graphql/resolvers');
 const Bell = require('@hapi/bell');
 const Hapi = require('@hapi/hapi');
 
+// FACEBOOK APP INFO
 const FacebookClientID = process.env.FACEBOOK_CLIENTID;
 const FacebookClientSecret = process.env.FACEBOOK_CLIENTSECRET;
+
+// TWITTER APP INFO
+const TwitterClientID = process.env.TWITTER_CLIENTID;
+const TwitterClientSecret = process.env.TWITTER_CLIENTSECRET;
 
 const init = async (typeDefs, resolvers) => {
   const app = Hapi.server({ port: 4000 });
@@ -27,40 +32,64 @@ const init = async (typeDefs, resolvers) => {
     clientId: FacebookClientID,
     clientSecret: FacebookClientSecret,
     // location: app.info.uri
-    location: 'https://ms-social-media.vercel.app/'
+    location: 'https://ms-social-media.vercel.app/',
   });
 
-  app.route([{
-    method: '*', // Must handle both GET and POST
-    path: '/loginFacebook', // The callback endpoint registered with the provider
-    options: {
-      auth: {
-        mode: 'try',
-        strategy: 'facebook',
-      },
-      handler: (request, h) => {
-        if (!request.auth.isAuthenticated) {
-          return request.auth;
-        }
+  app.auth.strategy('twitter', 'bell', {
+    provider: 'twitter',
+    password: 'cookie_encryption_password_secure',
+    isSecure: false,
+    clientId: TwitterClientID,
+    clientSecret: TwitterClientSecret,
+  });
 
-        // console.log(request.auth.credentials);
+  app.route([
+    {
+      method: '*', // Must handle both GET and POST
+      path: '/loginFacebook', // The callback endpoint registered with the provider
+      options: {
+        auth: {
+          mode: 'try',
+          strategy: 'facebook',
+        },
+        handler: (request, h) => {
+          if (!request.auth.isAuthenticated) {
+            return request.auth;
+          }
 
-        // Perform any account lookup or registration, setup local session,
-        // and redirect to the application. The third-party credentials are
-        // stored in request.auth.credentials. Any query parameters from
-        // the initial request are passed back via request.auth.credentials.query.
+          // console.log(request.auth.credentials);
 
-        return h.redirect('/home');
+          // Perform any account lookup or registration, setup local session,
+          // and redirect to the application. The third-party credentials are
+          // stored in request.auth.credentials. Any query parameters from
+          // the initial request are passed back via request.auth.credentials.query.
+
+          return h.redirect('/home');
+        },
       },
     },
-  },
-  {
-    method: 'GET',
-    path: '/test',
-    handler: (request, h) => {
-      return {msg: 'hi'}
-    }
-  }]);
+    {
+      method: '*',
+      path: '/loginTwitter',
+      options: {
+        auth: 'twitter',
+        handler: function (request, h) {
+          return (
+            '<pre>' +
+            JSON.stringify(request.auth.credentials, null, 4) +
+            '</pre>'
+          );
+        },
+      },
+    },
+    {
+      method: 'GET',
+      path: '/test',
+      handler: (request, h) => {
+        return { msg: 'hi' };
+      },
+    },
+  ]);
 
   const server = new ApolloServer({
     typeDefs,
