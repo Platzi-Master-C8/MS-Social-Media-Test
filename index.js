@@ -70,7 +70,7 @@ const init = async (typeDefs, resolvers) => {
     },
     {
       method: '*',
-      path: '/loginTwitter',
+      path: '/loginTwit',
       options: {
         auth: 'twitter',
         handler: function (request, h) {
