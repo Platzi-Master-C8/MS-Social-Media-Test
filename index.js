@@ -21,10 +21,15 @@ const FacebookClientSecret = process.env.FACEBOOK_CLIENTSECRET;
 const TwitterClientID = process.env.TWITTER_CLIENTID;
 const TwitterClientSecret = process.env.TWITTER_CLIENTSECRET;
 
+// LINKEDIN APP INFO
+const LinkedInClientID = process.env.LINKEDIN_CLIENTID;
+const LinkedInClientSecret = process.env.LINKEDIN_CLIENTSECRET;
+
 const init = async (typeDefs, resolvers) => {
   const app = Hapi.server({ port: 4000 });
   await app.register(Bell);
 
+  // Facebook
   app.auth.strategy('facebook', 'bell', {
     provider: 'facebook',
     password: 'cookie_encryption_password_secure',
@@ -35,12 +40,25 @@ const init = async (typeDefs, resolvers) => {
     location: 'https://ms-social-media.vercel.app/',
   });
 
+  // Twitter
   app.auth.strategy('twitter', 'bell', {
     provider: 'twitter',
     password: 'cookie_encryption_password_secure',
     isSecure: false,
     clientId: TwitterClientID,
     clientSecret: TwitterClientSecret,
+  });
+
+  // LinkedIn
+  app.auth.strategy('linkedin', 'bell', {
+    provider: 'linkedin',
+    password: 'cookie_encryption_password_secure',
+    isSecure: false,
+    clientId: LinkedInClientID,
+    clientSecret: LinkedInClientSecret,
+    providerParams: {
+      redirect_uri: app.info.uri + '/loginLinkedin',
+    },
   });
 
   app.route([
@@ -70,9 +88,23 @@ const init = async (typeDefs, resolvers) => {
     },
     {
       method: '*',
-      path: '/loginTwit',
+      path: '/loginTwitter',
       options: {
         auth: 'twitter',
+        handler: function (request, h) {
+          return (
+            '<pre>' +
+            JSON.stringify(request.auth.credentials, null, 4) +
+            '</pre>'
+          );
+        },
+      },
+    },
+    {
+      method: '*',
+      path: '/loginLinkedin',
+      options: {
+        auth: 'linkedin',
         handler: function (request, h) {
           return (
             '<pre>' +
