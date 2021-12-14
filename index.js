@@ -15,10 +15,20 @@ const Hapi = require('@hapi/hapi');
 
 const routes = require('./routes');
 
+const app = Hapi.server({ port: process.env.PORT || 4000 });
 const init = async (typeDefs, resolvers) => {
-  const app = Hapi.server({ port: process.env.PORT || 4000 });
+  // const app = Hapi.server({ port: process.env.PORT || 4000 });
   await app.register(Bell);
   await app.register(routes);
+
+  // ROUTE FOR TESTING
+  /* app.route({
+    method: 'GET',        // define the method this route will handle
+    path: '/{yourname*}', // this is how you capture route parameters in Hapi
+    handler: function(req, h) { // request handler method
+      return 'Hello ' + req.params.yourname + '!'; // reply with text.
+    }
+  }); */
 
   const server = new ApolloServer({
     typeDefs,
@@ -37,3 +47,5 @@ process.on('unhandledRejection', (err) => {
 });
 
 init(typeDefs, resolvers);
+
+module.exports = app;

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "lab -c"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "node": "14.x"
   },
   "devDependencies": {
+    "@hapi/lab": "^24.4.0",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
