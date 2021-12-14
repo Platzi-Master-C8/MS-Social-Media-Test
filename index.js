@@ -21,14 +21,14 @@ const init = async (typeDefs, resolvers) => {
   await app.register(Bell);
   await app.register(routes);
 
-  // ROUTE FOR TESTING
-  /* app.route({
+  // ROUTE ONLY FOR TESTING PURPOSES USING LAB
+  app.route({
     method: 'GET',        // define the method this route will handle
-    path: '/{yourname*}', // this is how you capture route parameters in Hapi
+    path: '/hi', // this is how you capture route parameters in Hapi
     handler: function(req, h) { // request handler method
-      return 'Hello ' + req.params.yourname + '!'; // reply with text.
+      return 'Hello'; // reply with text.
     }
-  }); */
+  });
 
   const server = new ApolloServer({
     typeDefs,
