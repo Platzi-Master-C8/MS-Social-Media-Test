@@ -22,13 +22,13 @@ const init = async (typeDefs, resolvers) => {
   await app.register(routes);
 
   // ROUTE ONLY FOR TESTING PURPOSES USING LAB
-  app.route({
+  /* app.route({
     method: 'GET',        // define the method this route will handle
     path: '/hi', // this is how you capture route parameters in Hapi
     handler: function(req, h) { // request handler method
       return 'Hello'; // reply with text.
     }
-  });
+  }); */
 
   const server = new ApolloServer({
     typeDefs,
