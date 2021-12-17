@@ -1,0 +1,37 @@
+{
+	"localizedLastName": "Sánchez González",
+	"profilePicture": {
+		"displayImage": "urn:li:digitalmediaAsset:C4E03AQH_Rx841fGM0g"
+	},
+	"firstName": {
+		"localized": {
+			"en_US": "Carlos Andrés"
+		},
+		"preferredLocale": {
+			"country": "US",
+			"language": "en"
+		}
+	},
+	"vanityName": "casan3",
+	"lastName": {
+		"localized": {
+			"en_US": "Sánchez González"
+		},
+		"preferredLocale": {
+			"country": "US",
+			"language": "en"
+		}
+	},
+	"localizedHeadline": "Software Developer at ALAMO SEGUROS",
+	"id": "gyopAD4CsK",
+	"headline": {
+		"localized": {
+			"en_US": "Software Developer at ALAMO SEGUROS"
+		},
+		"preferredLocale": {
+			"country": "US",
+			"language": "en"
+		}
+	},
+	"localizedFirstName": "Carlos Andrés"
+}
