@@ -11,11 +11,12 @@ exports.plugin = {
     server.auth.strategy('linkedin', 'bell', {
       provider: 'linkedin',
       password: 'cookie_encryption_password_secure',
-      isSecure: true,
+      isSecure: false,
       clientId: config.linkedInClientID,
       clientSecret: config.linkedInClientSecret,
       providerParams: {
         redirect_uri: server.info.uri + '/loginLinkedin',
+        // redirect_uri: 'https://ms-social-media.vercel.app/api/v1/loginLinkedin'
       },
     });
 
