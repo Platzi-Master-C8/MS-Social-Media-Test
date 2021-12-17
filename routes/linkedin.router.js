@@ -36,7 +36,7 @@ exports.plugin = {
           // console.log(request.auth);
           if(request.auth.isAuthenticated) {
             const profile = request.auth.credentials.profile;
-            h.state('linkedInLogin', { profile });
+            // h.state('linkedInLogin', profile);
             return h.redirect('https://mf-social-media-test-angaven.vercel.app/connect-social');
           }
 
