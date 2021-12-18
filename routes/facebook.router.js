@@ -7,30 +7,27 @@ exports.plugin = {
   // multiple: true,
   name: 'facebookAPI',
   register: async function (server, options) {
-    /* server.auth.strategy({
-      name: 'facebook',
-      password: 'cookie_encryption_password_secure_1245654654645',
+    server.auth.strategy('facebook', 'bell', {
+      provider: 'facebook',
+      password: 'cookie_encryption_password_secure',
       isSecure: true,
       clientId: config.facebookClientID,
       clientSecret: config.facebookClientSecret,
-      // location: server.info.uri
-      location: 'https://819e-2806-266-480-213-b032-d8c2-98ae-ccfc.ngrok.io',
-      protocol: 'oauth2',
-      auth: 'https://www.facebook.com/v12.0/dialog/oauth',
-      token: 'https://graph.facebook.com/v12.0/oauth/access_token',
-
-    }, 'bell'); */
+      // location: 'https://ms-social-media.vercel.app',
+      location: 'https://f987-200-68-167-242.ngrok.io'
+    });
 
     server.route({
       method: '*',
       path: '/loginFacebook',
       options: {
-        /* auth: {
+        auth: {
           mode: 'try',
           strategy: 'facebook',
-        }, */
+        },
         handler: (request, h) => {
           if (!request.auth.isAuthenticated) {
+            console.log(request.auth.error);
             return (
               'Authentication failed due to: ' + request.auth.error.message
             );
