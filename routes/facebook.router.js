@@ -13,8 +13,8 @@ exports.plugin = {
       isSecure: true,
       clientId: config.facebookClientID,
       clientSecret: config.facebookClientSecret,
-      // location: 'https://ms-social-media.vercel.app',
-      location: 'https://f987-200-68-167-242.ngrok.io'
+      location: 'https://ms-social-media.vercel.app',
+      // location: 'https://f987-200-68-167-242.ngrok.io'
     });
 
     server.route({
