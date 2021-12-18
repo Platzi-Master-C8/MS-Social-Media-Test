@@ -7,7 +7,6 @@ exports.plugin = {
   // multiple: true,
   name: 'twitterAPI',
   register: async function (server, options) {
-
     server.auth.strategy('twitter', 'bell', {
       provider: 'twitter',
       password: 'cookie_encryption_password_secure',
@@ -17,11 +16,19 @@ exports.plugin = {
     });
 
     server.route({
-      method: '*',
+      method: ['GET', 'POST'],
       path: '/loginTwitter',
       options: {
-        auth: 'twitter',
+        auth: {
+          mode: 'try',
+          strategy: 'twitter',
+        },
         handler: function (request, h) {
+          if (!request.auth.isAuthenticated) {
+            return (
+              'Authentication failed due to: ' + request.auth.error.message
+            );
+          }
           return (
             '<pre>' +
             JSON.stringify(request.auth.credentials, null, 4) +
