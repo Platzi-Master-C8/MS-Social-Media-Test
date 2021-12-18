@@ -35,9 +35,14 @@ exports.plugin = {
           ); */
           // console.log(request.auth);
           if(request.auth.isAuthenticated) {
+            if (!request.auth.isAuthenticated) {
+              return (
+                'Authentication failed due to: ' + request.auth.error.message
+              );
+            }
             const profile = request.auth.credentials.profile;
             // h.state('linkedInLogin', profile);
-            return h.redirect('https://mf-social-media-test-angaven.vercel.app/connect-social');
+            return h.redirect('https://mf-social-media-test-angaven.vercel.app/');
           }
 
         },
