@@ -13,6 +13,7 @@ exports.plugin = {
       isSecure: true,
       clientId: config.twitterClientID,
       clientSecret: config.twitterClientSecret,
+      location: 'https://ms-social-media.vercel.app',
     });
 
     server.route({
