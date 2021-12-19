@@ -10,7 +10,7 @@ exports.plugin = {
     server.auth.strategy('twitter', 'bell', {
       provider: 'twitter',
       password: 'cookie_encryption_password_secure',
-      isSecure: false,
+      isSecure: true,
       clientId: config.twitterClientID,
       clientSecret: config.twitterClientSecret,
     });
