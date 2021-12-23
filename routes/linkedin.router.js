@@ -11,12 +11,13 @@ exports.plugin = {
     server.auth.strategy('linkedin', 'bell', {
       provider: 'linkedin',
       password: 'cookie_encryption_password_secure',
-      isSecure: false,
+      isSecure: true,
       clientId: config.linkedInClientID,
       clientSecret: config.linkedInClientSecret,
+      location: 'https://ms-social-media.vercel.app',
       providerParams: {
-        redirect_uri: server.info.uri + '/loginLinkedin',
-        // redirect_uri: 'https://ms-social-media.vercel.app/api/v1/loginLinkedin'
+        // redirect_uri: server.info.uri + '/loginLinkedin',
+        redirect_uri: 'https://ms-social-media.vercel.app/api/v1/loginLinkedin'
       },
     });
 
@@ -42,7 +43,7 @@ exports.plugin = {
             }
             const profile = request.auth.credentials.profile;
             // h.state('linkedInLogin', profile);
-            return h.redirect('https://mf-social-media-test-angaven.vercel.app/');
+            return h.redirect('https://mf-social-media-test.vercel.app/dashboard');
           }
 
         },

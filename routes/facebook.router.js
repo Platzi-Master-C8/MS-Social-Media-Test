@@ -27,17 +27,13 @@ exports.plugin = {
         },
         handler: (request, h) => {
           if (!request.auth.isAuthenticated) {
-            console.log(request.auth.error);
             return (
               'Authentication failed due to: ' + request.auth.error.message
             );
           }
-
-          return (
-            '<pre>' +
-            JSON.stringify(request.auth.credentials, null, 4) +
-            '</pre>'
-          );
+          const profile = request.auth.credentials.profile;
+          // h.state('linkedInLogin', profile);
+          return h.redirect('https://mf-social-media-test.vercel.app/dashboard');
         },
       },
     });
