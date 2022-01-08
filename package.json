@@ -6,14 +6,17 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "lab -c"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@hapi/bell": "^12.3.0",
     "@hapi/hapi": "^20.2.1",
+    "@hapi/jwt": "^2.1.0",
     "apollo-server-hapi": "^3.5.0",
+    "dotenv": "^10.0.0",
     "graphql": "^16.0.1",
     "joi": "^17.5.0"
   },
@@ -21,6 +24,8 @@
     "node": "14.x"
   },
   "devDependencies": {
+    "@hapi/code": "^8.0.5",
+    "@hapi/lab": "^24.4.0",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
