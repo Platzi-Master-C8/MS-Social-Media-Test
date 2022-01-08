@@ -14,7 +14,7 @@ exports.plugin = {
       clientId: config.facebookClientID,
       clientSecret: config.facebookClientSecret,
       location: 'https://ms-social-media.vercel.app',
-      // location: 'https://f987-200-68-167-242.ngrok.io'
+      // location: 'https://f987-200-68-167-242.ngrok.io',
     });
 
     server.route({
@@ -22,7 +22,6 @@ exports.plugin = {
       path: '/loginFacebook',
       options: {
         auth: {
-          mode: 'try',
           strategy: 'facebook',
         },
         handler: (request, h) => {
@@ -32,8 +31,11 @@ exports.plugin = {
             );
           }
           const profile = request.auth.credentials.profile;
-          // h.state('linkedInLogin', profile);
-          return h.redirect('https://mf-social-media-test.vercel.app/dashboard');
+          const token = server.methods.generateJWT(profile.id, 'user');
+
+          return h.redirect(
+            'https://mf-social-media-test.vercel.app/dashboard?token=' + token
+          );
         },
       },
     });
