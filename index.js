@@ -14,11 +14,14 @@ const Bell = require('@hapi/bell');
 const Hapi = require('@hapi/hapi');
 
 const routes = require('./routes');
+const services = require('./services');
 
 const app = Hapi.server({ port: process.env.PORT || 4000 });
 const init = async (typeDefs, resolvers) => {
-  // const app = Hapi.server({ port: process.env.PORT || 4000 });
+
+  // register plugins
   await app.register(Bell);
+  await app.register(services);
   await app.register(routes);
 
   // ROUTE ONLY FOR TESTING PURPOSES USING LAB
