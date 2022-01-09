@@ -14,7 +14,7 @@ exports.plugin = {
           {
             aud: 'urn:audience:social',
             iss: 'urn:issuer:social',
-            user: userId,
+            id: userId,
             group: userGroup,
           },
           {

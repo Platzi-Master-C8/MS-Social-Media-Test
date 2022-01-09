@@ -39,5 +39,23 @@ exports.plugin = {
         },
       },
     });
+
+    server.route({
+      method: 'GET',
+      path: '/facebookInfo',
+      options: {
+        handler: async (request, h) => {
+          const profile = request.auth.credentials;
+          
+          try {
+            const info = await server.methods.getFacebookInfo(profile.id);
+            return { facebookInfo: { info } };
+          } catch (err) {
+            console.log(err);
+            return err;
+          }
+        },
+      },
+    });
   },
 };
