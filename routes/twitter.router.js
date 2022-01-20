@@ -1,6 +1,5 @@
 'use strict';
 
-const Jwt = require('@hapi/jwt');
 const { config } = require('../config/config');
 
 exports.plugin = {
