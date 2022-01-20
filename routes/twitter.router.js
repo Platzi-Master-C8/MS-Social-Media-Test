@@ -21,7 +21,6 @@ exports.plugin = {
       path: '/loginTwitter',
       options: {
         auth: {
-          mode: 'try',
           strategy: 'twitter',
         },
         handler: function (request, h) {
@@ -31,8 +30,11 @@ exports.plugin = {
             );
           }
           const profile = request.auth.credentials.profile;
-          // h.state('linkedInLogin', profile);
-          return h.redirect('https://mf-social-media-test.vercel.app/dashboard');
+          const token = server.methods.generateJWT(profile.id, 'user');
+
+          return h.redirect(
+            'https://mf-social-media-test.vercel.app/dashboard?token=' + token
+          );
         },
       },
     });
