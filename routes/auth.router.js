@@ -8,16 +8,14 @@ exports.plugin = {
   register: async function (server, options) {
     await server.register(Jwt);
 
-    server.auth.strategy('my_jwt_strategy', 'jwt', {
-      keys: config.jwtKey,
+    server.auth.strategy('auth0_jwt', 'jwt', {
+      keys: {
+        uri: 'https://platzimaster.us.auth0.com/.well-known/jwks.json',
+      },
       verify: {
-        aud: 'urn:audience:social',
-        iss: 'urn:issuer:social',
-        sub: false,
-        nbf: true,
-        exp: true,
-        maxAgeSec: 3600, // 1 hour
-        timeSkewSec: 15,
+        aud: 'https://platzimaster.us.auth0.com/api/v2/',
+        iss: 'https://platzimaster.us.auth0.com/',
+        sub: false
       },
       validate: (artifacts, request, h) => {
         console.log(artifacts.decoded.payload);
@@ -28,22 +26,6 @@ exports.plugin = {
       },
     });
 
-    server.auth.default('my_jwt_strategy');
-
-    server.route({
-      method: 'POST',
-      path: '/adminLogin',
-      options: {
-        auth: false,
-        handler: (request, h) => {
-
-          //Check if user is actually a valid user in DB and password is valid
-
-
-          const token = server.methods.generateJWT('1', 'admin');
-          return {accessToken: token};
-        },
-      },
-    });
+    server.auth.default('auth0_jwt');
   },
 };
