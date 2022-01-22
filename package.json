@@ -27,11 +27,22 @@
   },
   "devDependencies": {
     "@hapi/code": "^8.0.5",
-    "@hapi/lab": "^24.4.0",
-    "eslint": "^8.3.0",
+    "@hapi/lab": "^24.5.0",
+    "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "nodemon": "^2.0.15",
-    "prettier": "^2.5.0"
-  }
+    "prettier": "^2.5.1"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Platzi-Master-C8/MS-Social-Media-Test.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Platzi-Master-C8/MS-Social-Media-Test/issues"
+  },
+  "homepage": "https://github.com/Platzi-Master-C8/MS-Social-Media-Test#readme"
 }
