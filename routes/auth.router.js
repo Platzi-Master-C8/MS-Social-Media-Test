@@ -21,7 +21,7 @@ exports.plugin = {
         console.log(artifacts.decoded.payload);
         return {
           isValid: true,
-          // credentials: { user: artifacts.decoded.payload.user }
+          credentials: { user: artifacts.decoded.payload.sub }
         };
       },
     });

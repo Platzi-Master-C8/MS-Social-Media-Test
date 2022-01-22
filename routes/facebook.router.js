@@ -42,18 +42,19 @@ exports.plugin = {
 
     server.route({
       method: 'GET',
-      path: '/facebookInfo',
+      path: '/info',
       options: {
         handler: async (request, h) => {
           const profile = request.auth.credentials;
-          
-          try {
+          console.log(profile);
+          return 'facebookinfo';
+          /* try {
             const info = await server.methods.getFacebookInfo(profile.id);
             return { facebookInfo: { info } };
           } catch (err) {
             console.log(err);
             return err;
-          }
+          } */
         },
       },
     });

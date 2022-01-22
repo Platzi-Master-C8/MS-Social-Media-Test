@@ -10,7 +10,7 @@ const routes = [
   {
     plugin: facebookRouter,
     routes: {
-      prefix: API_VERSION
+      prefix: `${API_VERSION}/facebook`
     }
   },
   {
