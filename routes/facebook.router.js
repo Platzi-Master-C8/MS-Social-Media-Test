@@ -46,15 +46,15 @@ exports.plugin = {
       options: {
         handler: async (request, h) => {
           const profile = request.auth.credentials;
-          console.log(profile);
-          return 'facebookinfo';
-          /* try {
-            const info = await server.methods.getFacebookInfo(profile.id);
-            return { facebookInfo: { info } };
+          const accessToken = profile.user.identities[0].access_token;
+          
+          try {
+            const info = await server.methods.getFacebookInfo(accessToken);
+            return { info };
           } catch (err) {
             console.log(err);
             return err;
-          } */
+          }
         },
       },
     });

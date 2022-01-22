@@ -9,6 +9,8 @@ const config = {
   twitterClientSecret: process.env.TWITTER_CLIENTSECRET,
   linkedInClientID: process.env.LINKEDIN_CLIENTID,
   linkedInClientSecret: process.env.LINKEDIN_CLIENTSECRET,
+  integrationsClientID: process.env.INTEGRATIONS_CLIENTID,
+  integrationsClientSecret: process.env.INTEGRATIONS_CLIENTSECRET,
   jwtKey: process.env.JWT_KEY,
   dbUser: process.env.DB_USER,
   dbPassword: process.env.DB_PASSWORD,
