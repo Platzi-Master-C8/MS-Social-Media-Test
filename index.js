@@ -9,12 +9,11 @@ const {
 
 const typeDefs = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
-
 const Bell = require('@hapi/bell');
 const Hapi = require('@hapi/hapi');
-
 const routes = require('./routes');
 const services = require('./services');
+const authStrategies = require('./utils/auth_strategies');
 
 const app = Hapi.server({
   port: process.env.PORT || 4000,
@@ -22,23 +21,14 @@ const app = Hapi.server({
     cors: true,
   }, */
 });
+
 const init = async (typeDefs, resolvers) => {
+
   // register plugins
   await app.register(Bell);
   await app.register(services);
+  await app.register(authStrategies);
   await app.register(routes);
-
-  // ROUTE ONLY FOR TESTING PURPOSES USING LAB
-  app.route({
-    method: 'GET',        // define the method this route will handle
-    /* options: {
-      auth: false
-    }, */
-    path: '/hi', // this is how you capture route parameters in Hapi
-    handler: function(req, h) { // request handler method
-      return 'Hello'; // reply with text.
-    }
-  });
 
   const server = new ApolloServer({
     typeDefs,

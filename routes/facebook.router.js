@@ -1,25 +1,11 @@
 'use strict';
 
-const { config } = require('../config/config');
-
 exports.plugin = {
-  // pkg: require('../package.json'),
-  // multiple: true,
   name: 'facebookAPI',
   register: async function (server, options) {
-    server.auth.strategy('facebook', 'bell', {
-      provider: 'facebook',
-      password: 'cookie_encryption_password_secure',
-      isSecure: true,
-      clientId: config.facebookClientID,
-      clientSecret: config.facebookClientSecret,
-      location: 'https://ms-social-media.vercel.app',
-      // location: 'https://f987-200-68-167-242.ngrok.io',
-    });
-
-    server.route({
+    /* server.route({
       method: '*',
-      path: '/loginFacebook',
+      path: '/login',
       options: {
         auth: {
           strategy: 'facebook',
@@ -38,18 +24,19 @@ exports.plugin = {
           );
         },
       },
-    });
+    }); */
 
     server.route({
       method: 'GET',
-      path: '/facebookInfo',
+      path: '/info',
       options: {
         handler: async (request, h) => {
           const profile = request.auth.credentials;
+          const accessToken = profile.user.identities[0].access_token;
           
           try {
-            const info = await server.methods.getFacebookInfo(profile.id);
-            return { facebookInfo: { info } };
+            const info = await server.methods.getFacebookInfo(accessToken);
+            return { info };
           } catch (err) {
             console.log(err);
             return err;
