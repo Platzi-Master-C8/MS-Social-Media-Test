@@ -15,13 +15,13 @@ const routes = [
   {
     plugin: twitterRouter,
     routes: {
-      prefix: API_VERSION
+      prefix: `${API_VERSION}/twitter`
     }
   },
   {
     plugin: linkedinRouter,
     routes: {
-      prefix: API_VERSION
+      prefix: `${API_VERSION}/linkedin`
     }
   },
   {

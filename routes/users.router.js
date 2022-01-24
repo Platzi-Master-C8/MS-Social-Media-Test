@@ -1,9 +1,7 @@
 'use strict';
 
-// const { config } = require('../config/config');
-
 exports.plugin = {
-  name: 'users_router',
+  name: 'usersRouter',
   register: async function (server, options) {
     server.route({
       method: 'GET',

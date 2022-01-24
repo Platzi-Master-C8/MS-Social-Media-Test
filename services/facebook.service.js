@@ -18,7 +18,7 @@ exports.plugin = {
 
         const res = await wreck.request(
           'GET',
-          'https://graph.facebook.com/me',
+          'https://graph.facebook.com/me?fields=email,birthday,gender,name,groups{name},likes,events',
           {}
         );
         const body = await Wreck.read(res, {});

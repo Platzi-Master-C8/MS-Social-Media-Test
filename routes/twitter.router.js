@@ -1,24 +1,11 @@
 'use strict';
 
-const { config } = require('../config/config');
-
 exports.plugin = {
-  // pkg: require('../package.json'),
-  // multiple: true,
   name: 'twitterAPI',
   register: async function (server, options) {
-    server.auth.strategy('twitter', 'bell', {
-      provider: 'twitter',
-      password: 'cookie_encryption_password_secure',
-      isSecure: true,
-      clientId: config.twitterClientID,
-      clientSecret: config.twitterClientSecret,
-      location: 'https://ms-social-media.vercel.app',
-    });
-
-    server.route({
+    /* server.route({
       method: ['GET', 'POST'],
-      path: '/loginTwitter',
+      path: '/login',
       options: {
         auth: {
           strategy: 'twitter',
@@ -37,6 +24,6 @@ exports.plugin = {
           );
         },
       },
-    });
+    }); */
   },
 };
