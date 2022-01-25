@@ -1,6 +1,5 @@
 'use strict';
 
-// const { config } = require('../config/config');
 const Wreck = require('@hapi/wreck');
 
 exports.plugin = {
@@ -18,7 +17,7 @@ exports.plugin = {
 
         const res = await wreck.request(
           'GET',
-          'https://graph.facebook.com/me?fields=email,birthday,gender,name,groups{name},likes,events',
+          'https://graph.facebook.com/me?fields=email,birthday,gender,name,groups{name},likes,events,picture',
           {}
         );
         const body = await Wreck.read(res, {});

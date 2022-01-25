@@ -1,5 +1,7 @@
 'use strict';
 
+const { config } = require('../../config/config');
+
 exports.plugin = {
   name: 'authStrategies',
   register: async function (server, options) {
@@ -38,11 +40,11 @@ exports.plugin = {
 
       server.auth.strategy('auth0_jwt', 'jwt', {
         keys: {
-          uri: 'https://platzimaster.us.auth0.com/.well-known/jwks.json',
+          uri: config.jwksUri,
         },
         verify: {
-          aud: 'https://platzimaster.us.auth0.com/api/v2/',
-          iss: 'https://platzimaster.us.auth0.com/',
+          aud: config.jwtAud,
+          iss: config.jwtIss,
           sub: false,
         },
         validate: async (artifacts, request, h) => {
@@ -53,7 +55,7 @@ exports.plugin = {
           console.log(audience);
   
           // Get token from Auth0 to call management API
-          const token = await server.methods.getTokenAuth0('https://platzimaster.us.auth0.com/api/v2/');
+          const token = await server.methods.getTokenAuth0(config.jwtAud);
   
           // Get userInfo from Auth0
           const userInfo = await server.methods.getUserInfoAuth0(id, token.access_token);
