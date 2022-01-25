@@ -52,14 +52,15 @@ exports.plugin = {
           const id = artifacts.decoded.payload.sub;
           const audience = artifacts.decoded.payload.aud;
 
-          console.log(audience);
+          // console.log(audience);
   
           // Get token from Auth0 to call management API
           const token = await server.methods.getTokenAuth0(config.jwtAud);
+          console.log(token);
   
           // Get userInfo from Auth0
           const userInfo = await server.methods.getUserInfoAuth0(id, token.access_token);
-          console.log(userInfo);
+          // console.log(userInfo);
           // Update database with user info
   
   
