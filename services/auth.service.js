@@ -2,7 +2,6 @@
 
 const { config } = require('../config/config');
 const Jwt = require('@hapi/jwt');
-// const Wreck = require('@hapi/wreck');
 const axios = require('axios');
 
 exports.plugin = {
@@ -37,28 +36,6 @@ exports.plugin = {
     server.method(
       'getTokenAuth0',
       async (audience) => {
-        /* const wreck = Wreck.defaults({
-          headers: {
-            'content-type': 'application/json',
-          },
-        });
-
-        const res = await wreck.request(
-          'POST',
-          'https://platzimaster.us.auth0.com/oauth/token',
-          {
-            payload: {
-              client_id: config.integrationsClientID,
-              client_secret: config.integrationsClientSecret,
-              audience: audience,
-              grant_type: 'client_credentials',
-            },
-          }
-        );
-
-        const body = await Wreck.read(res, {});
-        const token = JSON.parse(body.toString()); */
-
         const resp = await axios.post(
           'https://platzimaster.us.auth0.com/oauth/token',
           {
@@ -77,16 +54,6 @@ exports.plugin = {
     server.method(
       'getUserInfoAuth0',
       async (userId, token) => {
-        /* const { resp, payload } = await Wreck.get(
-          `https://platzimaster.us.auth0.com/api/v2/users/${userId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        return JSON.parse(payload.toString()); */
         const resp = await axios.get(`https://platzimaster.us.auth0.com/api/v2/users/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -53,7 +53,7 @@ exports.plugin = {
         // Get token from Auth0 to call management API
         try {
           const token = await server.methods.getTokenAuth0(config.jwtAud);
-          console.log(token);
+          // console.log(token);
 
           // Get userInfo from Auth0
           const userInfo = await server.methods.getUserInfoAuth0(
@@ -61,7 +61,7 @@ exports.plugin = {
             token.access_token
           );
           // console.log(userInfo);
-          
+
           // Update database with user info
 
           return {
