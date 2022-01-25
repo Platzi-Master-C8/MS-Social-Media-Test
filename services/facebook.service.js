@@ -1,6 +1,6 @@
 'use strict';
 
-const Wreck = require('@hapi/wreck');
+const axios = require('axios');
 
 exports.plugin = {
   name: 'facebookService',
@@ -8,20 +8,13 @@ exports.plugin = {
     server.method(
       'getFacebookInfo',
       async (token) => {
-        const wreck = Wreck.defaults({
+        const resp = await axios.get('https://graph.facebook.com/me?fields=email,birthday,gender,name,groups{name},likes,events,picture', {
           headers: {
-            Authorization:
-              `Bearer ${token}`,
-          },
+            Authorization: `Bearer ${token}`,
+          }
         });
 
-        const res = await wreck.request(
-          'GET',
-          'https://graph.facebook.com/me?fields=email,birthday,gender,name,groups{name},likes,events,picture',
-          {}
-        );
-        const body = await Wreck.read(res, {});
-        return JSON.parse(body.toString());
+        return resp.data;
       },
       {}
     );
