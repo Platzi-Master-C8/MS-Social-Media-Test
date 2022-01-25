@@ -55,8 +55,13 @@ exports.plugin = {
           // console.log(audience);
   
           // Get token from Auth0 to call management API
-          const token = await server.methods.getTokenAuth0(config.jwtAud);
-          console.log(token);
+          try {
+            const token = await server.methods.getTokenAuth0(config.jwtAud);
+            console.log(token);
+          } catch (err) {
+            console.log(err);
+            return err;
+          }
   
           // Get userInfo from Auth0
           const userInfo = await server.methods.getUserInfoAuth0(id, token.access_token);
