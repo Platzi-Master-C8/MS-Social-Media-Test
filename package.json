@@ -17,6 +17,7 @@
     "@hapi/jwt": "^2.1.0",
     "@hapi/wreck": "^17.1.0",
     "apollo-server-hapi": "^3.5.0",
+    "axios": "^0.25.0",
     "dotenv": "^10.0.0",
     "graphql": "^16.0.1",
     "joi": "^17.5.0",

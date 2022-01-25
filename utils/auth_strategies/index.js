@@ -5,7 +5,6 @@ const { config } = require('../../config/config');
 exports.plugin = {
   name: 'authStrategies',
   register: async function (server, options) {
-
     /* server.auth.strategy('facebook', 'bell', {
       provider: 'facebook',
       password: 'cookie_encryption_password_secure',
@@ -38,39 +37,44 @@ exports.plugin = {
         location: 'https://ms-social-media.vercel.app',
       }); */
 
-      server.auth.strategy('auth0_jwt', 'jwt', {
-        keys: {
-          uri: config.jwksUri,
-        },
-        verify: {
-          aud: config.jwtAud,
-          iss: config.jwtIss,
-          sub: false,
-        },
-        validate: async (artifacts, request, h) => {
-          // Get user id from Auth0 JWT payload
-          const id = artifacts.decoded.payload.sub;
-          const audience = artifacts.decoded.payload.aud;
+    server.auth.strategy('auth0_jwt', 'jwt', {
+      keys: {
+        uri: config.jwksUri,
+      },
+      verify: {
+        aud: config.jwtAud,
+        iss: config.jwtIss,
+        sub: false,
+      },
+      validate: async (artifacts, request, h) => {
+        // Get user id from Auth0 JWT payload
+        const id = artifacts.decoded.payload.sub;
 
-          console.log(audience);
-  
-          // Get token from Auth0 to call management API
+        // Get token from Auth0 to call management API
+        try {
           const token = await server.methods.getTokenAuth0(config.jwtAud);
-  
+          // console.log(token);
+
           // Get userInfo from Auth0
-          const userInfo = await server.methods.getUserInfoAuth0(id, token.access_token);
-          console.log(userInfo);
+          const userInfo = await server.methods.getUserInfoAuth0(
+            id,
+            token.access_token
+          );
+          // console.log(userInfo);
+
           // Update database with user info
-  
-  
+
           return {
             isValid: true,
             credentials: { user: userInfo },
           };
-  
-        },
-      });
-  
-      server.auth.default('auth0_jwt');
+        } catch (err) {
+          console.log(err);
+          return err;
+        }
+      },
+    });
+
+    server.auth.default('auth0_jwt');
   },
 };
