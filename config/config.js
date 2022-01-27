@@ -7,6 +7,7 @@ const config = {
   facebookClientSecret: process.env.FACEBOOK_CLIENTSECRET,
   twitterClientID: process.env.TWITTER_CLIENTID,
   twitterClientSecret: process.env.TWITTER_CLIENTSECRET,
+  twitterBearerToken: process.env.TWITTER_BEARERTOKEN,
   linkedInClientID: process.env.LINKEDIN_CLIENTID,
   linkedInClientSecret: process.env.LINKEDIN_CLIENTSECRET,
   integrationsClientID: process.env.INTEGRATIONS_CLIENTID,
