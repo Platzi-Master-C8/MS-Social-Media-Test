@@ -24,5 +24,25 @@ exports.plugin = {
         },
       },
     }); */
+
+    server.route({
+      method: 'GET',
+      path: '/info',
+      options: {
+        handler: async (request, h) => {
+          const profile = request.auth.credentials;
+          const accessToken = profile.user.identities[0].access_token;
+          console.log(profile);
+          
+          try {
+            const info = await server.methods.getLinkedinInfo(accessToken);
+            return { info };
+          } catch (err) {
+            console.log(err);
+            return err;
+          }
+        },
+      },
+    });
   },
 };
