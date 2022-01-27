@@ -25,5 +25,25 @@ exports.plugin = {
         },
       },
     }); */
+
+    server.route({
+      method: 'GET',
+      path: '/info',
+      options: {
+        handler: async (request, h) => {
+          const profile = request.auth.credentials;
+          // const accessToken = profile.user.identities[0].access_token;
+          const id = profile.user.identities[0].user_id;
+          
+          try {
+            const info = await server.methods.getTwitterInfo(id);
+            return { info };
+          } catch (err) {
+            console.log(err);
+            return err;
+          }
+        },
+      },
+    });
   },
 };
