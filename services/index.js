@@ -1,5 +1,6 @@
 const authService = require('./auth.service');
 const facebookService = require('./facebook.service');
+const linkedinService = require('./linkedin.service');
 const userService = require('./users.service');
 
 const services = [
@@ -8,6 +9,9 @@ const services = [
   },
   {
     plugin: facebookService,
+  },
+  {
+    plugin: linkedinService,
   },
   {
     plugin: userService,
