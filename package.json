@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/bell": "^12.3.0",
+    "@hapi/boom": "^9.1.4",
     "@hapi/hapi": "^20.2.1",
     "@hapi/jwt": "^2.1.0",
     "apollo-server-hapi": "^3.5.0",

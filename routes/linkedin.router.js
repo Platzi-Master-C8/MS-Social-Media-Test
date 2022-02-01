@@ -1,3 +1,5 @@
+const Boom = require('@hapi/boom');
+
 'use strict';
 
 exports.plugin = {
@@ -31,16 +33,24 @@ exports.plugin = {
       options: {
         handler: async (request, h) => {
           const profile = request.auth.credentials;
-          const accessToken = profile.user.identities[0].access_token;
-          console.log(profile);
-          
-          try {
-            const info = await server.methods.getLinkedinInfo(accessToken);
-            return { info };
-          } catch (err) {
-            console.log(err);
-            return err;
+          const identities = profile.user.identities;
+
+          // check if user has a connection with linkedin
+          const identity = identities.find(
+            (identity) => identity.connection === 'linkedin'
+          );
+
+          if (identity) {
+            try {
+              const info = await server.methods.getLinkedinInfo(identity.access_token);
+              return { lk: info };
+            } catch (err) {
+              console.log(err);
+              return Boom.forbidden('try again some time');
+            }
           }
+
+          return Boom.unauthorized('no linkedin connection');
         },
       },
     });

@@ -1,3 +1,5 @@
+const Boom = require('@hapi/boom');
+ 
 'use strict';
 
 exports.plugin = {
@@ -32,15 +34,24 @@ exports.plugin = {
       options: {
         handler: async (request, h) => {
           const profile = request.auth.credentials;
-          const accessToken = profile.user.identities[0].access_token;
-          
-          try {
-            const info = await server.methods.getFacebookInfo(accessToken);
-            return { info };
-          } catch (err) {
-            console.log(err);
-            return err;
+          const identities = profile.user.identities;
+
+          // check if user has a connection with facebook
+          const identity = identities.find(
+            (identity) => identity.connection === 'facebook'
+          );
+
+          if (identity) {
+            try {
+              const info = await server.methods.getFacebookInfo(identity.access_token);
+              return { fb: info };
+            } catch (err) {
+              console.log(err);
+              return Boom.forbidden('try again some time');
+            }
           }
+
+          return Boom.unauthorized('no facebook connection');
         },
       },
     });
