@@ -1,3 +1,5 @@
+const Boom = require('@hapi/boom');
+
 'use strict';
 
 exports.plugin = {
@@ -32,16 +34,24 @@ exports.plugin = {
       options: {
         handler: async (request, h) => {
           const profile = request.auth.credentials;
-          // const accessToken = profile.user.identities[0].access_token;
-          const id = profile.user.identities[0].user_id;
-          
-          try {
-            const info = await server.methods.getTwitterInfo(id);
-            return { info };
-          } catch (err) {
-            console.log(err);
-            return err;
+          const identities = profile.user.identities;
+
+          // check if user has a connection with twitter
+          const identity = identities.find(
+            (identity) => identity.connection === 'twitter'
+          );
+
+          if (identity) {
+            try {
+              const info = await server.methods.getTwitterInfo(identity.user_id);
+              return { tw: info };
+            } catch (err) {
+              console.log(err);
+              return Boom.forbidden('try again some time');
+            }
           }
+
+          return Boom.unauthorized('no twitter connection');
         },
       },
     });
