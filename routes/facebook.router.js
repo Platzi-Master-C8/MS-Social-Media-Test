@@ -43,7 +43,7 @@ exports.plugin = {
 
           if (identity) {
             try {
-              const info = await server.methods.getFacebookInfo(identity.access_token);
+              const info = await server.methods.getFacebookInfo(identity.access_token, profile.user);
               return { fb: info };
             } catch (err) {
               console.log(err);
