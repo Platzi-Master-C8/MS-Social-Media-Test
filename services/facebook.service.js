@@ -8,13 +8,15 @@ exports.plugin = {
     server.method(
       'getFacebookInfo',
       async (token, userProfile) => {
-        const {email, name, picture, user_id } = userProfile;
+        const {email, name, user_id } = userProfile;
 
         const resp = await axios.get('https://graph.facebook.com/me?fields=email,birthday,gender,name,groups{name},likes,events,picture', {
           headers: {
             Authorization: `Bearer ${token}`,
           }
         });
+
+        console.log(resp.data);
 
         const {
           birthday, 
@@ -32,13 +34,14 @@ exports.plugin = {
           nationality,
           current_location,
           gender,
-          contacts
+          contacts,
+          picture
         } = resp.data;
 
         return {
           email, 
           name, 
-          picture, 
+          picture: picture.data.url, 
           user_id,
           birthday, 
           languages, 
