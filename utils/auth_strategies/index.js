@@ -60,9 +60,9 @@ exports.plugin = {
             id,
             token.access_token
           );
-          // console.log(userInfo);
 
           // Update database with user info
+          await server.methods.updateUser(userInfo);
 
           return {
             isValid: true,
