@@ -7,7 +7,7 @@ exports.plugin = {
       method: 'GET',
       path: '/{id?}',
       options: {
-        auth: false, //quitar para produccion
+        // auth: false, //quitar para produccion
         handler: async (request, h) => {
           try {
             const id = request.params.id;
@@ -20,9 +20,9 @@ exports.plugin = {
 
             resp = await server.methods.findUsers();
             return resp;
-          } catch (error) {
-            console.log(error);
-            return error;
+          } catch (err) {
+            console.log(err);
+            return err;
           }
         },
       },
