@@ -37,13 +37,13 @@ exports.plugin = {
         values (
           0, 
           '${name}', 
-          '${email}', 
+          ${email ? "'" + email + "'" : null}, 
           ${(birthday || profileData.birthday) ? "'" + (birthday || profileData.birthday) + "'" : null }, 
           ${(gender || profileData.gender) ? "'" + (gender || profileData.gender) + "'" : null}
           )
           ON CONFLICT (id) DO UPDATE
           SET name = '${name}', 
-          email = '${email}',
+          email = ${email ? "'" + email + "'" : null},
           date_of_birth = ${(birthday || profileData.birthday) ? "'" + (birthday || profileData.birthday) + "'" : null },
           gender = ${(gender || profileData.gender) ? "'" + (gender || profileData.gender) + "'" : null}`;
 
