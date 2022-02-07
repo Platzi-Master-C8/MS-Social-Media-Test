@@ -33,19 +33,22 @@ exports.plugin = {
       async ({user_id, name, email, birthday, gender, identities}) => {
         const { profileData } = identities.find(identity => identity.connection === 'facebook');
 
+        const bidy = `'${birthday}'` || (profileData ? `'${profileData.birthday}'` : null);
+        const gen = `'${gender}'` || (profileData ? `'${profileData.gender}'` : null);
+
         const query = `INSERT INTO users (id, name, email, date_of_birth, gender)
         values (
           0, 
           '${name}', 
           ${email ? "'" + email + "'" : null}, 
-          ${(birthday || profileData.birthday) ? "'" + (birthday || profileData.birthday) + "'" : null }, 
-          ${(gender || profileData.gender) ? "'" + (gender || profileData.gender) + "'" : null}
+          ${bidy}, 
+          ${gen}
           )
           ON CONFLICT (id) DO UPDATE
           SET name = '${name}', 
           email = ${email ? "'" + email + "'" : null},
-          date_of_birth = ${(birthday || profileData.birthday) ? "'" + (birthday || profileData.birthday) + "'" : null },
-          gender = ${(gender || profileData.gender) ? "'" + (gender || profileData.gender) + "'" : null}`;
+          date_of_birth = ${bidy},
+          gender = ${gen}`;
 
         await pool.query(query);
 
