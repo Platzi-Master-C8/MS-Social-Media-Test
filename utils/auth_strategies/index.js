@@ -62,7 +62,7 @@ exports.plugin = {
           );
 
           // Update database with user info
-          await server.methods.updateUser(userInfo);
+          // await server.methods.updateUser(userInfo);
 
           return {
             isValid: true,
