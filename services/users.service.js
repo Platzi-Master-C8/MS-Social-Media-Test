@@ -37,13 +37,12 @@ exports.plugin = {
         const bidy = birthday || (profileData ? profileData.birthday : null);
         // const gen = gender || (profileData ? profileData.gender : null);
 
-        const query = `INSERT INTO users (id, name, email, date_of_birth, gender)
+        const query = `INSERT INTO users (id, name, email, date_of_birth)
         values (
           '${user_id}', 
           '${name}', 
           ${email ? `'${email}'` : null}, 
-          ${bidy ? `'${bidy}'` : null}, 
-          ${gen ? `'${gen}'` : null}
+          ${bidy ? `'${bidy}'` : null}
           )
           ON CONFLICT (id) DO UPDATE
           SET name = '${name}', 
