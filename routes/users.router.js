@@ -39,9 +39,9 @@ exports.plugin = {
           try {
             
             const {id, info} = request.payload;
-            const customInfo = server.methods.generateCustomInfo();
+            // const customInfo = server.methods.generateCustomInfo();
 
-            return await server.methods.saveCustomInfo(id, customInfo);
+            return await server.methods.saveCustomInfo(id, info);
           } catch (err) {
             console.log(err);
             return Boom.badRequest(err);
