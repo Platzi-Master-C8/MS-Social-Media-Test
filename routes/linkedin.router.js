@@ -31,6 +31,7 @@ exports.plugin = {
       method: 'GET',
       path: '/info',
       options: {
+        // auth: false, //quitar para produccion
         handler: async (request, h) => {
           const profile = request.auth.credentials;
           const identities = profile.user.identities;
@@ -44,8 +45,8 @@ exports.plugin = {
             try {
               const info = await server.methods.getLinkedinInfo(identity.access_token);
 
-              if(profile.user_id.includes('linkedin')) {
-                info.profilePicture = profile.picture;
+              if(profile.user.user_id.includes('linkedin')) {
+                info.profilePicture = profile.user.picture;
               } else {
                 info.profilePicture = identity.profileData.picture;
               }
