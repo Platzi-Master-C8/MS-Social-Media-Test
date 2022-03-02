@@ -43,6 +43,13 @@ exports.plugin = {
           if (identity) {
             try {
               const info = await server.methods.getLinkedinInfo(identity.access_token);
+
+              if(profile.user_id.includes('linkedin')) {
+                info.profilePicture = profile.picture;
+              } else {
+                info.profilePicture = identity.profileData.picture;
+              }
+
               return { lk: info };
             } catch (err) {
               console.log(err);
